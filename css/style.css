@@ -1,0 +1,9 @@
+.cart-img{
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+}
+.modal-img {
+  height: 500px;
+  object-fit: cover;
+}
