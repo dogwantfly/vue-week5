@@ -133,7 +133,7 @@ const app = Vue.createApp({
         })
     },
     // 建立訂單
-    addOrder () {
+    addOrder (values,{resetForm}) {
       const api = `/api/${apiPath}/order`;
       const data = {
         user: this.user,
@@ -151,8 +151,9 @@ const app = Vue.createApp({
               region: '',
               address: '',
               payment: ''
-            }
-            this.message=''
+            };
+            this.message = '';
+            resetForm();
           }
         })
         .catch(error => {
