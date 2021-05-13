@@ -24,6 +24,7 @@ const app = Vue.createApp({
       message: '',
       products: {},
       carts: {},
+      change_cart_qty: 0,
       pagination: '',
       tempProduct: {},
       loadingStatus: {},
@@ -64,13 +65,22 @@ const app = Vue.createApp({
         })
     },
     // 加入購物車
-    addCart(id, qty = 1) {
+    addCart(id, qty = 1, e) {
       const api = `/api/${apiPath}/cart`;
-      const data = {
+      let data = {
         product_id: id,
         qty
       }
-      this.loadingStatus.loadingCart = id;
+      if (e.target.dataset.action === "changeQty") {
+        const newQty = e.target.value - qty
+        data = {
+          product_id: id,
+          qty: newQty
+        }
+      }
+      if (e.target.nodeName === "BUTTON") {
+        this.loadingStatus.loadingCart = id;
+      }
       this.$refs.productModal.hideModal();
       axios.post(api,{data})
         .then(response => {
@@ -141,7 +151,6 @@ const app = Vue.createApp({
       }
       axios.post(api,{data})
         .then(response => {
-          console.log(response)
           alert(response.data.message);
           if (response.data.success) {
             this.user = {
