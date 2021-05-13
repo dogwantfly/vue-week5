@@ -254,7 +254,7 @@
                  <input type="number" class="form-control"
                        v-model.number="qty" min="1">
                  <button type="button" class="btn btn-primary"
-                         @click="$emit('add-cart',tempProduct.id, qty)">加入購物車</button>
+                         @click="$emit('add-cart',tempProduct.id, qty, $event)">加入購物車</button>
                </div>
              </div>
             </div>
